@@ -167,21 +167,21 @@ imgsUploader.onchange = function(e) {
     }
     openIndIm()
 }
-imgsUploader.onclick = function() {
-    imgNameGoto = prompt('请输入图片名')
-    for (i = 0; i < imgFiles.length; i++)
-    {
-        if(imgFiles[i].name == imgNameGoto)
-        {
-            imgInd = i
-            openIndIm()
-            resetDataNewim()
-            show_origin_img()
-            return
-        }
-    }
-    alert('没有找到图片：' + imgNameGoto)
-}
+// imgsUploader.onclick = function() {
+//     imgNameGoto = prompt('请输入图片名')
+//     for (i = 0; i < imgFiles.length; i++)
+//     {
+//         if(imgFiles[i].name == imgNameGoto)
+//         {
+//             imgInd = i
+//             openIndIm()
+//             resetDataNewim()
+//             show_origin_img()
+//             return
+//         }
+//     }
+//     alert('没有找到图片：' + imgNameGoto)
+// }
 
 
 function openIndIm() {
