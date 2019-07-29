@@ -75,8 +75,11 @@ function saveObjs() {
     imRes = {"imgName": image.name, "objs": objs}
     blob = new Blob([JSON.stringify(imRes)], {type: ""})
     name = image.name.split('.')[0]
+    console.log((image.src.split(image.name,2)[0]).replace("file:///",""))
+    // jsonFile = (image.src.split(image.name,2)[0]).replace("file:///","") + name + '.json'
     jsonFile = name + '.json'
-    saveJson(jsonFile, blob)
+    // saveJson(jsonFile, blob)
+    saveAs(blob, jsonFile)
 
     imgInd += 1
     openIndIm()
@@ -164,6 +167,22 @@ imgsUploader.onchange = function(e) {
     }
     openIndIm()
 }
+imgsUploader.onclick = function() {
+    imgNameGoto = prompt('请输入图片名')
+    for (i = 0; i < imgFiles.length; i++)
+    {
+        if(imgFiles[i].name == imgNameGoto)
+        {
+            imgInd = i
+            openIndIm()
+            resetDataNewim()
+            show_origin_img()
+            return
+        }
+    }
+    alert('没有找到图片：' + imgNameGoto)
+}
+
 
 function openIndIm() {
     if (imgInd < imgFiles.length)
@@ -453,24 +472,25 @@ LabelSelector.onclick = function() {
     ctx.strokeStyle = obj.labelColor;
     ctx.strokeRect(obj.x, obj.y, obj.w, obj.h);
 };
-LabelSelector.ondblclick = function() {
-    inputDBL = $('input[name=label]:checked');
-    labelDBL = $('label[for="' + inputDBL.attr('id') + '"]')
+// 去掉双击修改标签
+// LabelSelector.ondblclick = function() {
+//     inputDBL = $('input[name=label]:checked');
+//     labelDBL = $('label[for="' + inputDBL.attr('id') + '"]')
     
-    inp = prompt('请输入该类的名称')
-    if (inp == '' || inp == null)
-    {
-        console.log('输入为空')
-        return
-    }
-    obj.label = inp
-    obj.labelColor = labelDBL.attr('style').split(' ')[1]
-    labelDBL.text(obj.label)
-    inputDBL.attr('value', obj.label)
+//     inp = prompt('请输入该类的名称')
+//     if (inp == '' || inp == null)
+//     {
+//         console.log('输入为空')
+//         return
+//     }
+//     obj.label = inp
+//     obj.labelColor = labelDBL.attr('style').split(' ')[1]
+//     labelDBL.text(obj.label)
+//     inputDBL.attr('value', obj.label)
 
-    labelID = labelDBL.attr('id')
-    localStorage.setItem(labelID, obj.label);
-};
+//     labelID = labelDBL.attr('id')
+//     localStorage.setItem(labelID, obj.label);
+// };
 
 //////////////////////////////////////////////
 //           加载历史信息                   //
